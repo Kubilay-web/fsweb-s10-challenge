@@ -1,3 +1,10 @@
+import {
+ NOT_EKLE,
+ NOT_SIL
+} from "./actions";
+
+
+
 const s10chLocalStorageKey = "s10ch";
 
 const baslangicDegerleri = {
@@ -9,6 +16,20 @@ const baslangicDegerleri = {
     },
   ],
 };
+
+const reducer = (state = baslangicDegerleri, action) => {
+  switch (action.type) {
+    case NOT_EKLE:
+      return { ...state, notlar: [...state.notlar, action.payload] };
+    case NOT_SIL:
+      const updatedNotlar = state.notlar.filter(not => not.id !== action.payload);
+      return { ...state, notlar: updatedNotlar };
+    default:
+      return state;
+  }
+};
+
+export default reducer;
 
 function localStorageStateYaz(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
