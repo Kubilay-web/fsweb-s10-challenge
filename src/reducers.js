@@ -3,8 +3,6 @@ import {
  NOT_SIL
 } from "./actions";
 
-
-
 const s10chLocalStorageKey = "s10ch";
 
 const baslangicDegerleri = {
@@ -29,7 +27,7 @@ const reducer = (state = baslangicDegerleri, action) => {
   }
 };
 
-export default reducer;
+
 
 function localStorageStateYaz(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
@@ -48,3 +46,5 @@ function baslangicNotlariniGetir(key) {
     return baslangicDegerleri
   }
 }
+
+export default reducer;

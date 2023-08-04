@@ -14,37 +14,27 @@ export function notSil(notId) {
   return { type: NOT_SIL, payload: notId };
 }
 
-// notEkleAPI ve notSilAPI action'larını güncelleyin
 export const notEkleAPI = (yeniNot) => (dispatch) => {
   axios
     .post("https://httpbin.org/anything", yeniNot)
     .then((res) => {
       if (res.status === 200) {
-        // Burada API'den dönen verileri kullanabilirsiniz
-        const extractedData = res.data.extractedData;
-
-        // Güncellenmiş notları eklemek için notEkle action'ını dispatch edin
+        const extractedData = res.data.json;
         dispatch(notEkle(extractedData));
-
-        // Eğer bir toast mesajı gösterecekseniz, burada uygun bir yöntemle gösterebilirsiniz.
       }
     })
     .catch((error) => console.log(error));
 };
 
 export const notSilAPI = (id) => (dispatch) => {
-  console.log(id);
   axios
-    .delete("https://httpbin.org/anything", { data: id })
+    .delete(`https://httpbin.org/anything`,{data:id})
     .then((res) => {
       if (res.status === 200) {
-        const extractedData = res.data.extractedData;
+        console.log(res.data.data);
+        const extractedData = res.data.data;
         dispatch(notSil(extractedData));
       }
-      toast.success("Not başarıyla silindi!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 2000, // 2 saniye sonra otomatik kapanacak
-      });
     })
     .catch((error) => console.log(error));
 };

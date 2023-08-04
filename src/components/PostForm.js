@@ -4,9 +4,9 @@ import { nanoid } from "nanoid";
 import { useHistory } from "react-router";
 import Gratitude from "./../assets/grForm.png";
 import { useDispatch } from "react-redux"; 
-import { notEkleAPI } from "../actions";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
+import { notEkleAPI } from "../actions";
 
 export default function PostForm() {
   const dispatch = useDispatch();
@@ -31,11 +31,9 @@ export default function PostForm() {
     dispatch(notEkleAPI(yeniNot));
     toast.success("Not başarıyla eklendi!", {
       position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 2000, // 2 saniye sonra otomatik kapanacak
+      autoClose: 2000,
     });
-    // burada ilgili eylemi dispatch edin
-    // toast mesajı gösterin
-    // sonra aşağıdaki satırı aktifleştirin
+    
      setTimeout(() => history.push("/notlar"), 2000);
   }
 
@@ -94,6 +92,7 @@ export default function PostForm() {
           Ekle
         </button>
       </form>
+      <ToastContainer/>
     </div>
   );
 }
